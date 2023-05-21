@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Создание файла на сервере при клике кнопки</title>
+  <script>
+    function createFile() {
+      fetch('/create-file', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            fileName: 'example.txt'
+          })
+        })
+        .then(response => {
+          // Обработка ответа сервера
+          console.log('Файл создан на сервере');
+        })
+        .catch(error => {
+          console.error('Ошибка:', error);
+        });
+    }
+  </script>
+</head>
+<body>
+  <button onclick="createFile()">Создать файл на сервере</button>
+</body>
+</html>
