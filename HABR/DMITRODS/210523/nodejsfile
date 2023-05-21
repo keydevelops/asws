@@ -1,0 +1,20 @@
+const express = require('express');
+const app = express();
+const fs = require('fs');
+
+// Принимаем POST-запрос на создание файла
+app.post('/create-file', function(req, res) {
+  let fileName = req.body.fileName;
+  if (!fileName) {
+    return res.status(400).send('Отсутствует имя файла');
+  }
+  fs.writeFile(fileName, 'Hello World!', function(err) {
+    if (err) throw err;
+    console.log(`Файл ${fileName} создан`);
+    res.send(`Файл ${fileName} создан`);
+  });
+});
+
+app.listen(3000, function() {
+  console.log('Сервер запущен на порту 3000');
+});
